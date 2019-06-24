@@ -1,0 +1,29 @@
+{
+  "name": "dvp_cdr_migration_tool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DuoSoftware/DVP_CDR_MIGRATION_TOOL.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DuoSoftware/DVP_CDR_MIGRATION_TOOL/issues"
+  },
+  "dependencies": {
+    "amqp": "^0.2.6",
+    "async": "^2.0.1",
+    "config": "^1.12.0",
+    "dvp-common": "1.3.0",
+    "dvp-dbmodels": "3.3.1",
+    "dvp-mongomodels": "^5.2.3",
+    "ioredis": "^3.1.1",
+    "redlock": "^3.0.0"
+  },
+  "homepage": "https://github.com/DuoSoftware/DVP_CDR_MIGRATION_TOOL#readme"
+}

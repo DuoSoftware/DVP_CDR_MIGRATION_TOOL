@@ -1,0 +1,20 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
+
+var adSchema = new Schema({
+    company: { type: Number, required: true },
+    tenant: { type: Number, required: true },
+    ldapServerIp: { type: String, required: true },
+    baseDN: { type: String, required: true },
+    username: { type: String, required: true },
+    password: { type: String, required: true, select: false },
+    created_at: {type:Date,default: Date.now,require:true},
+    updated_at: {type:Date,default: Date.now,require:true}
+});
+
+adSchema.index({ company: 1, tenant: 1, name: 1}, { unique: true });
+
+var ActiveDirectory = mongoose.model('ActiveDirectory', adSchema);
+
+module.exports.ActiveDirectory = ActiveDirectory;

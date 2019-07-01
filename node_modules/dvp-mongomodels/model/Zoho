@@ -1,0 +1,44 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
+
+
+var zohoSchema = new Schema({
+
+ company: { type: Number, required: true },
+ tenant: { type: Number, required: true },
+ refresh_token: {type: String, require: true},
+ access_token: {type: String, require: true},
+ expires_in: {type: Number, require: true},
+ token_type: {type: String, require: true},
+ created_at: {type:Date,default: Date.now,require:true},
+ updated_at: {type:Date,default: Date.now,require:true},
+ status:  { type: Boolean, required: true }
+
+});
+
+
+
+var zohoUserSchema = new Schema({
+ _id:{type: String, require: true, unique: true},
+ company: { type: Number, required: true },
+ tenant: { type: Number, required: true },
+ username: {type: String, require: true},
+ email: {type: String, require: true},
+ created_at: {type:Date,default: Date.now,require:true},
+ updated_at: {type:Date,default: Date.now,require:true},
+ integrated: { type: Boolean, required: true, default: false },
+ status:  { type: Boolean, required: true }
+
+});
+
+
+zohoSchema.index({ company: 1, tenant: 1}, { unique: true });
+zohoUserSchema.index({ company: 1, tenant: 1, email: 1}, { unique: true });
+
+var Zoho = mongoose.model('Zoho', zohoSchema);
+module.exports.Zoho = Zoho;
+
+
+var ZohoUser = mongoose.model('ZohoUser', zohoUserSchema);
+module.exports.ZohoUser = ZohoUser;

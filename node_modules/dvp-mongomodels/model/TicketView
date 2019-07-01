@@ -1,0 +1,23 @@
+var mongoose = require('mongoose');
+var ticketFilterSchema = require('./TicketFilter').ticketFilterSchema;
+var Schema = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
+
+var ticketViewSchema = new Schema({
+
+    title: { type: String, required: true},
+    active: Boolean,
+    owner: {type: ObjectId,ref: 'User'},
+    created_at: {type:Date,default: Date.now,require:true},
+    updated_at: {type:Date,default: Date.now,require:true},
+    company: { type: Number, required: true },
+    tenant: { type: Number, required: true },
+    conditions: {all: [ticketFilterSchema], any: [ticketFilterSchema]},
+    order: {by: {type: String, require: true}, ascending: {type: Boolean, require: true}},
+    public: Boolean
+
+});
+
+
+var TicketView = mongoose.model('TicketView', ticketViewSchema);
+module.exports.TicketView = TicketView;

@@ -1,0 +1,20 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+
+var mandrillAccountSchema = new Schema({
+
+ company: { type: Number, required: true },
+ tenant: { type: Number, required: true },
+ sub_account_id: {type: String, require: true},
+ created_at: {type:Date,default: Date.now,require:true},
+ updated_at: {type:Date,default: Date.now,require:true},
+ status:  { type: Boolean, required: true }
+
+});
+
+
+mandrillAccountSchema.index({ company: 1, tenant: 1}, { unique: true });
+
+var MandrillAccount = mongoose.model('MandrillAccount', mandrillAccountSchema);
+module.exports.MandrillAccount = MandrillAccount;

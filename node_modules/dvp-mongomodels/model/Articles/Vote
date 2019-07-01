@@ -1,0 +1,17 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
+
+
+var voteSchema = new Schema({
+
+ company: { type: Number, required: true },
+ tenant: { type: Number, required: true },
+ author: {type: ObjectId,ref: 'User'},
+ vote: {type: Boolean, required: true},
+ created_at: {type:Date,default: Date.now,require:true}
+
+});
+
+var ArticleVote = mongoose.model('ArticleVote', voteSchema);
+module.exports.ArticleVote = ArticleVote;

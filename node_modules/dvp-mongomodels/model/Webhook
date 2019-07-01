@@ -1,0 +1,18 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var webhookSchema = new Schema({
+    auth_type: {type: String, enum: ['Basic', 'Bearer'], required: false},
+    token: { type: String, required: false },
+    username: { type: String, required: false },
+    password: { type: String, required: false },
+    url: { type: String, required: true },
+    method: { type: String, enum: ['GET', 'POST','PUT', 'DELETE'], required: true, default: 'POST' },
+    company: { type: Number, required: true },
+    tenant: { type: Number, required: true },
+    uuid: { type: String, required: false },
+    event_type: { type: String, enum: ['call', 'agent','ticket'], required: true },
+    is_enabled: { type: Boolean, required: true, default: false }
+});
+
+module.exports = mongoose.model('Webhook', webhookSchema);;

@@ -1,0 +1,22 @@
+/**
+ * Created by a on 12/19/2016.
+ */
+
+// grab the things we need
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
+
+
+var chatConfigSchema = new Schema({
+    enabled: Boolean,
+    welcomeMessage: String,
+    company: { type: Number, required: true },
+    tenant: { type: Number, required: true },
+    created_at: Date,
+    updated_at: Date
+});
+
+chatConfigSchema.index({ company: 1, tenant: 1}, { unique: true });
+var ChatConfig = mongoose.model('ChatConfig', chatConfigSchema);
+module.exports = ChatConfig;

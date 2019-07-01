@@ -1,0 +1,22 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
+
+var organisationConfigSchema = new Schema({
+    company: { type: Number, required: true },
+    tenant: { type: Number, required: true },
+    highPriority_match :{ type: Boolean, required: true },
+    all_match :{ type: Boolean, required: true },
+    active_crm: {type: String, enum : ['facetone','zoho'], default: 'facetone', required: true},
+    created_at: Date,
+    updated_at: Date
+});
+
+organisationConfigSchema.path('highPriority_match').set(function (v) {
+    this.all_match = !v;
+    return v;
+});
+organisationConfigSchema.index({ company: 1, tenant: 1}, { unique: true });
+
+var OrganisationConfig = mongoose.model('OrganisationConfig', organisationConfigSchema);
+module.exports = OrganisationConfig;

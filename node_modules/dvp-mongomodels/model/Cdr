@@ -1,0 +1,12 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+
+var cdrSchema = new Schema({
+
+    uuid: {type: String, require: true, unique: true}
+
+},{strict: false});
+
+var Cdr = mongoose.model('Cdr', cdrSchema);
+module.exports.Cdr = Cdr;

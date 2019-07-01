@@ -1,0 +1,16 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var reportQueryFilterSchema = new Schema({
+    resourceName: { type: String, required: true },
+    resourceId: { type: String, required: true },
+    reportName: { type: String, required: true },
+    reportFilter: { },
+    tenant: { type: String, required: true },
+    company: { type: String, required: true },
+    created_at: Date,
+    updated_at: Date
+});
+
+var ReportQueryFilters = mongoose.model('ReportQueryFilters', reportQueryFilterSchema);
+module.exports = ReportQueryFilters;

@@ -1,0 +1,20 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+
+var twilioAccountSchema = new Schema({
+
+ company: { type: Number, required: true },
+ tenant: { type: Number, required: true },
+ sid: {type: String, require: true},
+ created_at: {type:Date,default: Date.now,require:true},
+ updated_at: {type:Date,default: Date.now,require:true},
+ status:  { type: Boolean, required: true }
+
+});
+
+
+twilioAccountSchema.index({ company: 1, tenant: 1}, { unique: true });
+
+var TwilioAccount = mongoose.model('TwilioAccount', twilioAccountSchema);
+module.exports.TwilioAccount = TwilioAccount;

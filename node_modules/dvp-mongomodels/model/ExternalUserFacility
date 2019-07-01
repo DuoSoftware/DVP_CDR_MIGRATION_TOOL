@@ -1,0 +1,16 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var uniqueValidator = require('mongoose-unique-validator');
+var ObjectId = Schema.ObjectId;
+
+
+var externalUserFacilitySchema = new Schema({
+    ssn:  {type: String, sparse: true},
+    facitlity_type: {},
+    created_at: Date,
+    updated_at: Date
+});
+
+externalUserFacilitySchema.plugin(uniqueValidator);
+var ExternalUserFacility = mongoose.model('ExternalUserFacility', externalUserFacilitySchema);
+module.exports = ExternalUserFacility;

@@ -1,0 +1,18 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
+
+var externalUserRecentTicket = new Schema({
+
+    user: {type: ObjectId,ref: 'ExternalUser', required: true},
+    company: { type: Number, required: true },
+    tenant: { type: Number, required: true },
+    tickets: [{type: ObjectId,ref: 'Ticket'}],
+
+
+});
+
+
+
+var ExternalUserRecentTicket = mongoose.model('ExternalUserRecentTicket', externalUserRecentTicket);
+module.exports.ExternalUserRecentTicket = ExternalUserRecentTicket;

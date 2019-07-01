@@ -1,0 +1,18 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
+
+
+var commentSchema = new Schema({
+
+ company: { type: Number, required: true },
+ tenant: { type: Number, required: true },
+ author: {type: ObjectId,ref: 'User'},
+ comment: {type: String, required: true},
+ created_at: {type:Date,default: Date.now,require:true},
+ updated_at: {type:Date,default: Date.now,require:true}
+
+});
+
+var ArticleComment = mongoose.model('ArticleComment', commentSchema);
+module.exports.ArticleComment = ArticleComment;

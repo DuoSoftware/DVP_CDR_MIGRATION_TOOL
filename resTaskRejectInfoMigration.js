@@ -10,6 +10,7 @@ let companyId = config.CompanyId;
 let tenantId = config.TenantId;
 let startTime = config.DataMigrationStartDay;
 let endTime = config.DataMigrationEndDay;
+let rotateSpeed = config.RotateSpeed;
 
 let offset = 0;
 
@@ -97,7 +98,7 @@ let getResTaskRejectInfoDetails = function(){
 
                 console.log('RES TASK REJECT INFOS PROCESSED : ' + offset);
 
-                setTimeout(getResTaskRejectInfoDetails, 5000);
+                setTimeout(getResTaskRejectInfoDetails, rotateSpeed);
 
             });
 

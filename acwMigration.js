@@ -10,6 +10,7 @@ let companyId = config.CompanyId;
 let tenantId = config.TenantId;
 let startTime = config.DataMigrationStartDay;
 let endTime = config.DataMigrationEndDay;
+let rotateSpeed = config.RotateSpeed;
 
 let offset = 0;
 
@@ -97,7 +98,7 @@ let getACWDetails = function(){
 
                 console.log('ACWS PROCESSED : ' + offset);
 
-                setTimeout(getACWDetails, 5000);
+                setTimeout(getACWDetails, rotateSpeed);
 
             });
 

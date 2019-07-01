@@ -10,6 +10,7 @@ let companyId = config.CompanyId;
 let tenantId = config.TenantId;
 let startTime = config.DataMigrationStartDay;
 let endTime = config.DataMigrationEndDay;
+let rotateSpeed = config.RotateSpeed;
 
 let convertCDRFromMongo = function(leg)
 {
@@ -1296,7 +1297,7 @@ let getCDRPrimaryLegs = function(){
 
                 console.log('CDRS PROCESSED : ' + offset);
 
-                setTimeout(getCDRPrimaryLegs, 5000);
+                setTimeout(getCDRPrimaryLegs, rotateSpeed);
 
             });
 

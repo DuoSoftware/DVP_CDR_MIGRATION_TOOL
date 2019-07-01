@@ -76,7 +76,7 @@ module.exports = {
   "Token":"",
   "SendAbandonCallsToQueue":true,
   "DataMigrationStartDay": "2019-06-12 00:00:00+05:30",
-  "DataMigrationEndDay": "2019-06-12 23:59:59+05:30",
+  "DataMigrationEndDay": "2019-06-20 23:59:59+05:30",
   "CompanyId": 103,
   "TenantId": 1
 };

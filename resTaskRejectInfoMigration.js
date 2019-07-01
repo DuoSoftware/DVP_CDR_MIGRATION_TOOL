@@ -48,14 +48,14 @@ let findPrimaryLegCDRFromMongo = function(uuid)
 };
 
 
-let processSingleAcwInfo = function(acwInfo, callback)
+let processSingleResInfo = function(resInfo, callback)
 {
-    findPrimaryLegCDRFromMongo(acwInfo.SessionId).then(uuidToReplace => {
+    findPrimaryLegCDRFromMongo(resInfo.SessionId).then(uuidToReplace => {
 
         if(uuidToReplace)
         {
             console.log('REWRITING SESSION ID : ' + uuidToReplace);
-            acwInfo.updateAttributes({SessionId: uuidToReplace}).then(function (resUpdate)
+            resInfo.updateAttributes({SessionId: uuidToReplace}).then(function (resUpdate)
             {
                 callback(null, true);
 
@@ -76,28 +76,28 @@ let processSingleAcwInfo = function(acwInfo, callback)
 
 };
 
-let getACWDetails = function(){
+let getResTaskRejectInfoDetails = function(){
 
     //Condition to Skip
     let executionArr = [];
 
 
-    dbModel.ResResourceAcwInfo.findAll({where :[{CompanyId: companyId, TenantId: tenantId, createdAt:{between:[startTime, endTime]}}], order:[['createdAt','ASC']], limit: 5, offset: offset}).then(function(acwInfos)
+    dbModel.ResResourceTaskRejectInfo.findAll({where :[{CompanyId: companyId, TenantId: tenantId, createdAt:{between:[startTime, endTime]}}], order:[['createdAt','ASC']], limit: 5, offset: offset}).then(function(resInfos)
     {
-        if(acwInfos && acwInfos.length > 0)
+        if(resInfos && resInfos.length > 0)
         {
-            acwInfos.forEach(acwInfo => {
+            resInfos.forEach(resInfo => {
 
-                executionArr.push(processSingleAcwInfo.bind(this, acwInfo));
+                executionArr.push(processSingleResInfo.bind(this, resInfo));
                 offset++;
 
             });
 
             async.series(executionArr, function(err, callback){
 
-                console.log('ACWS PROCESSED : ' + offset);
+                console.log('RES TASK REJECT INFOS PROCESSED : ' + offset);
 
-                setTimeout(getACWDetails, 5000);
+                setTimeout(getResTaskRejectInfoDetails, 5000);
 
             });
 
@@ -115,4 +115,4 @@ let getACWDetails = function(){
 
 };
 
-getACWDetails();
+getResTaskRejectInfoDetails();

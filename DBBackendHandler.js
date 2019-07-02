@@ -1,5 +1,6 @@
 let dbModel = require('dvp-dbmodels');
 let redlock = require('./RedisHandler.js').redlock;
+let logger = require('dvp-common/LogHandler/CommonLogHandler.js').logger;
 
 let GetSpecificLegsByUuids = function(uuidList, callback)
 {
@@ -115,8 +116,9 @@ let AddProcessedCDR = function(cdrObj, callback)
                 {
                     if(!processedCdr)
                     {
-                        console.log('================ SAVING CDR =================');
                         let cdr = dbModel.CallCDRProcessed.build(cdrObj);
+
+                        logger.info('INSERT CDR - %s | [%s]', cdrObj.Uuid, JSON.stringify(cdrObj));
 
                         cdr
                             .save()
@@ -139,7 +141,7 @@ let AddProcessedCDR = function(cdrObj, callback)
                     }
                     else
                     {
-                        console.log('================ UPDATING CDR =================');
+                        logger.info('UPDATE CDR - %s | [%s]', cdrObj.Uuid, JSON.stringify(cdrObj));
                         processedCdr.updateAttributes(cdrObj).then(function (resUpdate)
                         {
 

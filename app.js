@@ -18,7 +18,7 @@ let convertCDRFromMongo = function(leg)
 
         RawCdr.findOne({uuid: leg.Uuid}, function(err, cdrObj)
         {
-            if(cdrObj._doc)
+            if(cdrObj)
             {
                 let varSec = cdrObj._doc['variables'];
                 let callFlowSec = cdrObj._doc['callflow'];
@@ -430,7 +430,7 @@ let processBLegs = function(legInfo, cdrListArr, callback)
                                 let tempTransLeg = transferLeg;
                                 if(cdrMongoTrans)
                                 {
-                                    tempTransLeg = cdrMongoTrans.toJSON();
+                                    tempTransLeg = cdrMongoTrans;
                                 }
 
                                 tempTransLeg.IsTransferredParty = true;
@@ -540,7 +540,7 @@ let processOriginatedLegs = function(legInfo, cdrListArr, callback)
                                 let tempTransLeg = transferLeg;
                                 if(cdrMongoTrans)
                                 {
-                                    tempTransLeg = cdrMongoTrans.toJSON();
+                                    tempTransLeg = cdrMongoTrans;
                                 }
                                 tempTransLeg.IsTransferredParty = true;
                                 cdrListArr.push(tempTransLeg);
@@ -875,6 +875,7 @@ let processCampaignCDR = function(primaryLeg, curCdr)
 
 let processSingleCdrLeg = function(primaryLeg, callback)
 {
+	console.log("processCDRLegs line : 876");
     convertCDRFromMongo(primaryLeg).then(cdrMongo => {
 
         let cdr = decodeOriginatedLegs(cdrMongo);
@@ -886,10 +887,12 @@ let processSingleCdrLeg = function(primaryLeg, callback)
         {
             if(err)
             {
+		console.log("processCDRLegs line : 890")
                 logger.error('[DVP-CDRProcessor.processSingleCdrLeg] - [%s] - Error occurred while processing CDR Legs', err);
             }
             if(actionObj.SaveOnDB)
             {
+		console.log("processCDRLegs line : 895")
                 let cdrAppendObj = {};
                 let primaryLeg = cdr;
                 let isOutboundTransferCall = false;
@@ -1259,6 +1262,7 @@ let processSingleCdrLeg = function(primaryLeg, callback)
             }
             else
             {
+		console.log("processCDRLegs->else line :1263")
                 callback(null, actionObj);
             }
 
@@ -1277,11 +1281,11 @@ let getCDRPrimaryLegs = function(){
 
     //Condition to Skip
     let executionArr = [];
+    console.log("START TIME : " + startTime);
 
-
-    dbModel.CallCDR.findAll({where :[{Direction: 'inbound', CompanyId: companyId, TenantId: tenantId, CreatedTime:{between:[startTime, endTime]}}], order:[['CreatedTime','ASC']], limit: 5, offset: offset}).then(function(callLegs)
+    dbModel.CallCDR.findAll({where :[{Direction: 'inbound', CompanyId: companyId, TenantId: tenantId, CreatedTime:{between:[startTime, endTime]}}], order:[['CreatedTime','ASC']], limit: 150, offset: offset}).then(function(callLegs)
     {
-        if(callLegs && callLegs.length > 0)
+	if(callLegs && callLegs.length > 0)
         {
             callLegs.forEach(callLeg => {
                 if(callLeg.Direction === 'inbound' && callLeg.ObjCategory !== 'CONFERENCE' && (callLeg.OriginatedLegs !== null ||
@@ -1290,7 +1294,7 @@ let getCDRPrimaryLegs = function(){
                     executionArr.push(processSingleCdrLeg.bind(this, callLeg));
                 }
                 offset++;
-
+		 console.log("CDRSSSSsss"+ callLeg.SipToUser);
             });
 
             async.series(executionArr, function(err, callback){

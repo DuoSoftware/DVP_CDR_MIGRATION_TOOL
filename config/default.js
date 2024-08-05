@@ -2,24 +2,24 @@ module.exports = {
 
     "DB": {
         "Type":"postgres",
-        "User":"duo",
-        "Password":"DuoS123",
-        "Port":5432,
-        "Host":"104.236.231.11",
-        "Database":"duo"
+        "User":"",
+        "Password":"",
+        "Port":5000,
+        "Host":"",
+        "Database":""
     },
 
     "Redis":
         {
-            "mode":"instance",//instance, cluster, sentinel
-            "ip": "138.197.90.92",
-            "port": 6389,
-            "user": "duo",
-            "password": "DuoS123",
+            "mode":"",//instance, cluster, sentinel
+            "ip": "",
+            "port": 6379,
+            "user": "",
+            "password": "",
             "sentinels":{
-                "hosts": "138.197.90.92,45.55.205.92,138.197.90.92",
-                "port":16389,
-                "name":"redis-cluster"
+                "hosts": "",
+                "port":26379,
+                "name":""
             }
 
         },
@@ -27,57 +27,58 @@ module.exports = {
     "Security":
         {
 
-            "ip" : "45.55.142.207",
-            "port": 6389,
-            "user": "duo",
-            "password": "DuoS123",
-            "mode":"sentinel",//instance, cluster, sentinel
+            "ip" : "",
+            "port": 6379,
+            "user": "",
+            "password": "",
+            "mode":"",//instance, cluster, sentinel
             "sentinels":{
-                "hosts": "138.197.90.92,45.55.205.92,138.197.90.92",
-                "port":16389,
-                "name":"redis-cluster"
+                "hosts": "",
+                "port":26379,
+                "name":""
             }
         },
 
     "Mongo":
         {
-            "ip":"104.236.231.11",
-            "port":"27017",
-            "dbname":"dvpdb",
-            "password":"DuoS123",
-            "user":"duo",
-            "replicaset" :"104.236.231.11"
+            "ip":"",
+            "port":"",
+            "dbname":"",
+            "password":"",
+            "user":"",
+            "replicaset" :""
         },
 
     "RabbitMQ":
         {
-            "ip": "45.55.142.207",
+            "ip": "",
             "port": 5672,
-            "user": "admin",
-            "password": "admin",
+            "user": "",
+            "password": "",
             "vhost":'/'
         },
 
     "Services":
         {
 
-            "fileServiceHost": "fileservice.app.veery.cloud",
-            "fileServicePort": 5649,
-            "fileServiceVersion":"1.0.0.0"
+            "fileServiceHost": "",
+            "fileServicePort": 8812,
+            "fileServiceVersion":""
 
         },
 
     "Host":{
-        "Ip":"0.0.0.0",
+        "Ip":"",
         "Port":9093,
-        "Version":"1.0.0.0"
+        "Version":""
     },
 
   "Token":"",
   "SendAbandonCallsToQueue":true,
-  "DataMigrationStartDay": "2019-06-12 00:00:00+05:30",
-  "DataMigrationEndDay": "2019-06-20 23:59:59+05:30",
-  "CompanyId": 103,
+  "DataMigrationStartDay": "",
+  "DataMigrationEndDay": "",
+  "CompanyId": 14,
   "TenantId": 1,
-  "RotateSpeed": 2000
+  "RotateSpeed": 3000
+
 };

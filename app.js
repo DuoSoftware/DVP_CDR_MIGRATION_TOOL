@@ -1125,6 +1125,7 @@ let processSingleCdrLeg = function(primaryLeg, callback)
                     cdrAppendObj.FlowBillSec = 0;
                     cdrAppendObj.ProgressMediaSec = 0;
                     cdrAppendObj.WaitSec = 0;
+                    cdrAppendObj.CSATSec = 0;
 
                     if(primaryLeg.ProgressSec)
                     {
@@ -1179,6 +1180,12 @@ let processSingleCdrLeg = function(primaryLeg, callback)
                         if(cdrAppendObj.DVPCallDirection === 'inbound' && outLegAnswered)
                         {
                             cdrAppendObj.BillSec = primaryLeg.Duration - primaryLeg.TimeAfterInitialBridge;
+                            
+                            var csat_sec = cdrAppendObj.BillSec - secondaryLeg.BillSec;
+                            if (csat_sec < 0) {
+                                csat_sec = 0;
+                            }
+                            cdrAppendObj.CSATSec = csat_sec;
                         }
 
                         if(cdrAppendObj.DVPCallDirection === 'outbound')

@@ -2,24 +2,24 @@ module.exports = {
 
     "DB": {
         "Type":"postgres",
-        "User":"duo",
+        "User":"facetone",
         "Password":"DuoS123",
-        "Port":5432,
-        "Host":"192.168.3.173",
-        "Database":"duo"
+        "Port":5433,
+        "Host":"pgpool.facetone.lolc.lk",
+        "Database":"facetone"
     },
 
     "Redis":
         {
-            "mode":"intance",//instance, cluster, sentinel
-            "ip": "192.168.3.173",
+            "mode":"sentinel",//instance, cluster, sentinel
+            "ip": "redis1.facetone.lolc.lk",
             "port": 6379,
-            "user": "",
+            "user": "duo",
             "password": "DuoS123",
             "sentinels":{
-                "hosts": "redis1.facetone.slmo.com,redis2.facetone.slmo.com,redis3.facetone.slmo.com",
+                "hosts": "redis1.facetone.lolc.lk,redis2.facetone.lolc.lk,redis3.facetone.lolc.lk",
                 "port":26379,
-                "name":"facetone-cluster"
+                "name":"redis-cluster"
             }
 
         },
@@ -27,21 +27,21 @@ module.exports = {
     "Security":
         {
 
-            "ip" : "192.168.3.173",
+            "ip" : "redis1.facetone.lolc.lk",
             "port": 6379,
             "user": "duo",
             "password": "DuoS123",
             "mode":"sentinel",//instance, cluster, sentinel
             "sentinels":{
-                "hosts": "redis1.facetone.slmo.com,redis2.facetone.slmo.com,redis3.facetone.slmo.com",
+                "hosts": "redis1.facetone.lolc.lk,redis2.facetone.lolc.lk,redis3.facetone.lolc.lk",
                 "port":26379,
-                "name":"facetone-cluster"
+                "name":"redis-cluster"
             }
         },
 
     "Mongo":
         {
-            "ip":"mongo2.facetone.slmo.com,mongo3.facetone.slmo.com",
+            "ip":"mongo1.facetone.lolc.lk,mongo3.facetone.lolc.lk",
             "port":"27017",
             "dbname":"facetone",
             "password":"DuoS123",
@@ -51,9 +51,9 @@ module.exports = {
 
     "RabbitMQ":
         {
-            "ip": "192.168.3.177",
+            "ip": "rabbitmq1.facetone.lolc.lk,rabbitmq2.facetone.lolc.lk",
             "port": 5672,
-            "user": "duo",
+            "user": "admin",
             "password": "DuoS123",
             "vhost":'/'
         },
@@ -61,23 +61,23 @@ module.exports = {
     "Services":
         {
 
-            "fileServiceHost": "fileservice.facetone.lk",
-            "fileServicePort": 8812,
+            "fileServiceHost": "fileservice.facetone.lolc.lk",
+            "fileServicePort": 5649,
             "fileServiceVersion":"1.0.0.0"
 
         },
 
     "Host":{
-        "Ip":"",
+        "Ip":"0.0.0.0",
         "Port":9093,
-        "Version":""
+        "Version":"1.0.0.0"
     },
 
   "Token":"",
   "SendAbandonCallsToQueue":true,
-  "DataMigrationStartDay": "2019-11-04 10:00:00+05:30",
-  "DataMigrationEndDay": "2019-11-04 10:05:00+05:30",
-  "CompanyId": 2,
+  "DataMigrationStartDay": "2019-03-02 00:00:00+05:30",
+  "DataMigrationEndDay": "2019-03-03 23:59:59+05:30",
+  "CompanyId": 6,
   "TenantId": 1,
   "RotateSpeed": 3000
 };

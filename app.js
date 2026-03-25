@@ -20,6 +20,7 @@ let convertCDRFromMongo = function(leg)
         {
             if(cdrObj)
             {
+
                 let varSec = cdrObj._doc['variables'];
                 let callFlowSec = cdrObj._doc['callflow'];
 
@@ -1274,7 +1275,7 @@ let processSingleCdrLeg = function(primaryLeg, callback)
             }
 
 
-        })
+        });
 
     });
 
@@ -1290,7 +1291,7 @@ let getCDRPrimaryLegs = function(){
     let executionArr = [];
     console.log("START TIME : " + startTime);
 
-    dbModel.CallCDR.findAll({where :[{Direction: 'inbound', CompanyId: companyId, TenantId: tenantId, CreatedTime:{between:[startTime, endTime]}}], order:[['CreatedTime','ASC']], limit: 150, offset: offset}).then(function(callLegs)
+    dbModel.CallCDR.findAll({where :[{Direction: 'inbound', CompanyId: companyId, TenantId: tenantId, CreatedTime:{between:[startTime, endTime]}}], order:[['CreatedTime','ASC']], limit: 50, offset: offset}).then(function(callLegs)
     {
 	if(callLegs && callLegs.length > 0)
         {
@@ -1317,7 +1318,8 @@ let getCDRPrimaryLegs = function(){
         }
         else
         {
-            console.log("TERMINATING OPERATION");
+            console.log("TERMINATING OPERATION!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            process.exit()
         }
 
     });
